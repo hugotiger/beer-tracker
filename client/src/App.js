@@ -6,7 +6,7 @@ import { AddBeers } from "./presentational/AddBeers";
 import { BeerList } from "./presentational/BeerList";
 import { AppProviders } from "./context";
 
-function App() {
+export function App() {
   return (
     <AppProviders>
       <Header />
@@ -19,5 +19,3 @@ function App() {
     </AppProviders>
   );
 }
-
-export default App;
