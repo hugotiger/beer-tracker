@@ -2,7 +2,7 @@
   "name": "beer-tracker",
   "version": "1.0.0",
   "description": "Simple beer tracker built using MERN-stack",
-  "main": "server.js",
+  "main": "./server/index.js",
   "scripts": {
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
