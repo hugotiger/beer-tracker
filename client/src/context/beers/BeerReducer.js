@@ -1,8 +1,8 @@
 import {
-  EVENTS_LOADING,
-  EVENTS_FETCHED,
-  EVENT_ADDED,
-  EVENT_DELETED,
+  BEER_LOADING,
+  BEER_FETCHED,
+  BEER_ADDED,
+  BEER_DELETED,
   ERROR,
   INCREASE_COUNT,
 } from "./types";
@@ -10,40 +10,40 @@ import {
 const initialState = {
   isLoading: false,
   error: null,
-  events: null,
+  beers: null,
   showCount: 5,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case EVENTS_LOADING:
+    case BEER_LOADING:
       return { ...state, isLoading: true, error: null };
-    case EVENTS_FETCHED:
+    case BEER_FETCHED:
       return {
         ...state,
-        events: action.payload,
+        beers: action.payload,
         isLoading: false,
         error: false,
       };
     case ERROR:
       return {
         ...state,
-        events: null,
+        beers: null,
         isLoading: false,
         error: action.payload,
       };
-    case EVENT_ADDED:
+    case BEER_ADDED:
       return {
         ...state,
-        events: [action.payload, ...state.events],
+        beers: [action.payload, ...state.beers],
         isLoading: false,
         error: false,
         showCount: state.showCount + 1,
       };
-    case EVENT_DELETED:
+    case BEER_DELETED:
       return {
         ...state,
-        events: state.events.filter((event) => event._id !== action.payload),
+        beers: state.beers.filter((beers) => beers._id !== action.payload),
         isLoading: false,
         error: false,
         showCount: state.showCount > 5 ? state.showCount - 1 : 5,
@@ -52,9 +52,9 @@ export default function (state = initialState, action) {
       return {
         ...state,
         showCount:
-          state.showCount + 5 <= state.events.length
+          state.showCount + 5 <= state.beers.length
             ? (state.showCount += 5)
-            : state.events.length,
+            : state.beers.length,
       };
     default:
       throw new Error();

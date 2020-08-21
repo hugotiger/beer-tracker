@@ -1,5 +1,5 @@
-export const sumEventAmounts = (events) =>
-  events.map((event) => event.amount).reduce((acc, item) => (acc += item), 0);
+export const sumBeersAmount = (beers) =>
+  beers.map((beer) => beer.amount).reduce((acc, item) => (acc += item), 0);
 
 export const formatNumber = (number) => {
   if (number > 999999) {

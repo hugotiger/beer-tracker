@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../context/globalState/GlobalState";
+import { BeerContext } from "../context/beers/BeerContext";
 import { Dashboard } from "../components";
 import { calcDashboardStats } from "../helpers";
 
-export function EventDashboard() {
-  const { events, isLoading, error } = useContext(GlobalContext);
+export function BeersDashboard() {
+  const { beers, isLoading, error } = useContext(BeerContext);
 
   const { totalToday, avgLast30days } = calcDashboardStats(
-    events,
+    beers,
     isLoading,
     error
   );

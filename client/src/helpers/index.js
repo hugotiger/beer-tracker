@@ -1,31 +1,31 @@
 import moment from "moment";
-import { sumEventAmounts } from "../utils";
+import { sumBeersAmount } from "../utils";
 
-export const calcDashboardStats = (events, isLoading, error) => {
+export const calcDashboardStats = (beers, isLoading, error) => {
   let totalToday = "";
   let avgLast30days = "";
-  if (events && !error) {
-    totalToday = sumEventAmounts(
-      events.filter((event) => moment(event.createdAt).isSame(moment(), "days"))
+  if (beers && !error) {
+    totalToday = sumBeersAmount(
+      beers.filter((beers) => moment(beers.createdAt).isSame(moment(), "days"))
     );
 
-    const eventsFromPast30days = events.filter((event) =>
-      moment(event.createdAt).isAfter(moment().subtract(30, "days"))
+    const beersFromPast30days = beers.filter((beers) =>
+      moment(beers.createdAt).isAfter(moment().subtract(30, "days"))
     );
     let daysSinceStart;
-    if (eventsFromPast30days.length > 1) {
+    if (beersFromPast30days.length > 1) {
       daysSinceStart =
         moment().diff(
-          eventsFromPast30days[eventsFromPast30days.length - 1].createdAt,
+          beersFromPast30days[beersFromPast30days.length - 1].createdAt,
           "days"
         ) + 1;
     } else {
       daysSinceStart = 1;
     }
     avgLast30days = (
-      sumEventAmounts(eventsFromPast30days) / daysSinceStart
+      sumBeersAmount(beersFromPast30days) / daysSinceStart
     ).toFixed(1);
-  } else if (events && events.length === 0) {
+  } else if (beers && beers.length === 0) {
     totalToday = "0";
     avgLast30days = "0";
   } else if (isLoading || error === null) {

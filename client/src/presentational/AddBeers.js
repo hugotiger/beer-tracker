@@ -1,15 +1,15 @@
 import React, { useState, useContext } from "react";
-import { GlobalContext } from "../context/globalState/GlobalState";
+import { BeerContext } from "../context/beers/BeerContext";
 import { Button, TextField } from "../components";
 
-export function AddEvent() {
+export function AddBeers() {
   const [amount, setAmount] = useState(1);
   const [comment, setComment] = useState("");
-  const { addEvent, isLoading, error } = useContext(GlobalContext);
+  const { addBeers, isLoading, error } = useContext(BeerContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    addEvent({ amount: +amount, comment });
+    addBeers({ amount: +amount, comment });
     setComment("");
   }
 

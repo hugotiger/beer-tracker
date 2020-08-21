@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Create Schema
-const eventSchema = mongoose.Schema(
+const beersSchema = mongoose.Schema(
   {
     amount: {
       type: Number,
@@ -11,11 +11,12 @@ const eventSchema = mongoose.Schema(
     },
     comment: {
       type: String,
+      max: 35,
     },
   },
   { timestamps: true },
 );
 
-const Event = mongoose.model('event', eventSchema);
+const Beers = mongoose.model('beers', beersSchema);
 
-module.exports = Event;
+module.exports = Beers;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getAllEvents } from "../services/eventsApi";
-import { sumEventAmounts } from "../utils";
+import { getAllBeers } from "../services/beersApi";
+import { sumBeersAmount } from "../utils";
 
 export const useAllTimeTotal = () => {
   const [total, setTotal] = useState(null);
@@ -8,18 +8,18 @@ export const useAllTimeTotal = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEvents = () => {
+    const fetchBeers = () => {
       setIsLoading(true);
-      getAllEvents()
+      getAllBeers()
         .then((res) => {
           if (res.error) setError(res.data);
-          else setTotal(sumEventAmounts(res.data));
+          else setTotal(sumBeersAmount(res.data));
         })
         .catch((err) => setError(err))
         .finally(() => setIsLoading(false));
     };
 
-    fetchEvents();
+    fetchBeers();
   }, []);
 
   return { total, isLoading, error };

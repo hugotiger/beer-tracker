@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { GlobalContext } from "../context/globalState/GlobalState";
+import { BeerContext } from "../context/beers/BeerContext";
 import {
   Loader,
   List,
@@ -9,31 +9,32 @@ import {
 } from "../components";
 import ChevronIcon from "../assets/chevron-down.svg";
 
-export function EventList() {
+export function BeerList() {
   const {
-    events,
+    beers,
     isLoading,
     error,
     showCount,
-    fetchEventsFromPastWeek,
-    removeEvent,
+    fetchBeersFromPastWeek,
+    removeBeer,
     increaseCount,
-  } = useContext(GlobalContext);
+  } = useContext(BeerContext);
 
   const [openEvent, setOpenEvent] = useState(null);
 
   useEffect(() => {
-    fetchEventsFromPastWeek();
+    fetchBeersFromPastWeek();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Closes open event if beers are added/removed
   useEffect(() => {
     setOpenEvent(null);
-  }, [events]);
+  }, [beers]);
 
-  // Should only show if we don't already have any fetched events,
+  // Should only show if we don't already have any fetched beers,
   // else there's a different loading animation
-  if (isLoading && !events) {
+  if (isLoading && !beers) {
     return (
       <>
         <h2>History</h2>
@@ -55,36 +56,35 @@ export function EventList() {
     <div>
       <h2>History</h2>
       {/* // Only renders list if length is greater than zero. Else it renders a "no history" message */}
-      {events && (
+      {beers && (
         <>
-          {events.length === 0 && <p>No history yet</p>}
+          {beers.length === 0 && <p>No history yet</p>}
           <List
             // Hide list if there's no events
             style={
-              events.length >= 1 ? { display: "block" } : { display: "none" }
+              beers.length >= 1 ? { display: "block" } : { display: "none" }
             }
           >
             {isLoading && <Loader key="loader" />}
-            {events.slice(0, showCount).map((event, i) => (
+            {beers.slice(0, showCount).map((beers, i) => (
               <ListItem
-                key={event._id}
+                key={beers._id}
                 onClick={() => {
-                  // if (!isLoading) removeEvent(event);
                   openEvent === i ? setOpenEvent(null) : setOpenEvent(i);
                 }}
               >
                 <ListItemContent
                   open={openEvent === i}
-                  amount={event.amount}
-                  timestamp={event.createdAt}
-                  comment={event.comment}
+                  amount={beers.amount}
+                  timestamp={beers.createdAt}
+                  comment={beers.comment}
                   handleDelete={() => {
-                    if (!isLoading) removeEvent(event);
+                    if (!isLoading) removeBeer(beers);
                   }}
                 />
               </ListItem>
             ))}
-            {events && events.length > showCount && (
+            {beers && beers.length > showCount && (
               <ListButton
                 key="list-btn"
                 onClick={(e) => {

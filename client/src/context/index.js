@@ -2,7 +2,7 @@ import React from "react";
 import { Normalize } from "styled-normalize";
 import { GlobalStyle } from "../GlobalStyle";
 import { SnackBarProvider } from "./snackbar/SnackBarContext";
-import { GlobalProvider } from "./globalState/GlobalState";
+import { BeerProvider } from "./beers/BeerContext";
 
 export function AppProviders({ children }) {
   return (
@@ -10,7 +10,7 @@ export function AppProviders({ children }) {
       <Normalize />
       <GlobalStyle />
       <SnackBarProvider>
-        <GlobalProvider>{children}</GlobalProvider>
+        <BeerProvider>{children}</BeerProvider>
       </SnackBarProvider>
     </React.Fragment>
   );

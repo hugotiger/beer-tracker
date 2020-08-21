@@ -2,16 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-// Event model
-const Event = require('../models/Event');
+// Beers model
+const Beers = require('../models/Beers');
 
-// @route GET api/events
-// @desc Get all events
+// @route GET api/beers
+// @desc Get all beers
 // @access Public
 router.get('/', (req, res, next) => {
   try {
     const { ageLimit } = req.query;
-    Event.find(
+    Beers.find(
       ageLimit && {
         createdAt: {
           $lt: new Date(),
@@ -20,38 +20,38 @@ router.get('/', (req, res, next) => {
       },
     )
       .sort({ createdAt: -1 })
-      .then((events) => res.json(events));
+      .then((beers) => res.json(beers));
   } catch (err) {
     next(err);
   }
 });
 
-// @route POST api/events
-// @desc Create an event
+// @route POST api/beers
+// @desc Create an beers
 // @access Public
 router.post('/', (req, res, next) => {
   try {
-    const newEvent = new Event({
+    const newBeers = new Beers({
       amount: req.body.amount,
       comment: req.body.comment || null,
     });
-    newEvent.save().then((item) => res.status(201).json(item));
+    newBeers.save().then((item) => res.status(201).json(item));
   } catch (err) {
     next(err);
   }
 });
 
-// @route DELETE api/events/:id
-// @desc Delete an event
+// @route DELETE api/beers/:id
+// @desc Delete an beers
 // @access Public
 router.delete('/:id', (req, res, next) => {
   try {
-    Event.findByIdAndDelete(req.params.id, (err, event) => {
+    Beers.findByIdAndDelete(req.params.id, (err, beers) => {
       if (err) {
         res.status(404);
         return next(Error('Resource does not exist'));
       }
-      if (!event) {
+      if (!beers) {
         res.status(410);
         return next(Error('Resource already deleted'));
       }

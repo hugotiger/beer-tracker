@@ -1,16 +1,16 @@
 import React, { createContext, useReducer } from "react";
 import {
-  getEventsFromPastWeek,
-  postEvent,
-  deleteEvent,
-} from "../../services/eventsApi";
+  getBeersFromPastWeek,
+  postBeers,
+  deleteBeers,
+} from "../../services/beersApi";
 import { useSnackBars } from "../../hooks";
-import AppReducer from "./AppReducer";
+import AppReducer from "./BeerReducer";
 import {
-  EVENTS_LOADING,
-  EVENTS_FETCHED,
-  EVENT_ADDED,
-  EVENT_DELETED,
+  BEER_LOADING,
+  BEER_FETCHED,
+  BEER_ADDED,
+  BEER_DELETED,
   ERROR,
   INCREASE_COUNT,
 } from "./types";
@@ -18,32 +18,32 @@ import {
 const initialState = {
   isLoading: false,
   error: null,
-  events: null,
+  beers: null,
   showCount: 5,
 };
 
-export const GlobalContext = createContext(initialState);
+export const BeerContext = createContext(initialState);
 
-export const GlobalProvider = ({ children }) => {
+export const BeerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const { addAlert } = useSnackBars();
 
   // Actions
-  const fetchEventsFromPastWeek = () => {
-    dispatch({ type: EVENTS_LOADING });
-    getEventsFromPastWeek().then((res) => {
+  const fetchBeersFromPastWeek = () => {
+    dispatch({ type: BEER_LOADING });
+    getBeersFromPastWeek().then((res) => {
       dispatch({
-        type: res.error ? ERROR : EVENTS_FETCHED,
+        type: res.error ? ERROR : BEER_FETCHED,
         payload: res.data,
       });
     });
   };
 
-  const addEvent = (event) => {
-    dispatch({ type: EVENTS_LOADING });
+  const addBeers = (beers) => {
+    dispatch({ type: BEER_LOADING });
 
-    postEvent(event).then((res) => {
-      dispatch({ type: res.error ? ERROR : EVENT_ADDED, payload: res.data });
+    postBeers(beers).then((res) => {
+      dispatch({ type: res.error ? ERROR : BEER_ADDED, payload: res.data });
       if (res.error) {
         addAlert({
           variant: "error",
@@ -59,14 +59,14 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const removeEvent = (event) => {
-    dispatch({ type: EVENTS_LOADING });
+  const removeBeers = (beers) => {
+    dispatch({ type: BEER_LOADING });
 
-    deleteEvent(event._id).then((res) => {
+    deleteBeers(beers._id).then((res) => {
       dispatch(
         res.error
           ? { type: ERROR, payload: res.data }
-          : { type: EVENT_DELETED, payload: event._id }
+          : { type: BEER_DELETED, payload: beers._id }
       );
       if (res.error) {
         addAlert({
@@ -87,19 +87,19 @@ export const GlobalProvider = ({ children }) => {
   };
 
   return (
-    <GlobalContext.Provider
+    <BeerContext.Provider
       value={{
-        events: state.events,
+        beers: state.beers,
         showCount: state.showCount,
         isLoading: state.isLoading,
         error: state.error,
-        fetchEventsFromPastWeek,
-        addEvent,
-        removeEvent,
+        fetchBeersFromPastWeek,
+        addBeers,
+        removeBeers,
         increaseCount,
       }}
     >
       {children}
-    </GlobalContext.Provider>
+    </BeerContext.Provider>
   );
 };

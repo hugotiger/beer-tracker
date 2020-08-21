@@ -22,10 +22,10 @@ const errorHandler = (err) => {
 };
 
 // GET
-// Fetches all events
-export const getAllEvents = async () => {
+// Fetches all beers
+export const getAllBeers = async () => {
   try {
-    const response = await instance.get("events");
+    const response = await instance.get("beers");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -33,10 +33,10 @@ export const getAllEvents = async () => {
 };
 
 // GET
-// Fetches events from past 7 days
-export const getEventsFromPastWeek = async () => {
+// Fetches beers from past 7 days
+export const getBeersFromPastWeek = async () => {
   try {
-    const response = await instance.get("events?ageLimit=7");
+    const response = await instance.get("beers?ageLimit=7");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -44,10 +44,10 @@ export const getEventsFromPastWeek = async () => {
 };
 
 // POST
-// Adds one new event
-export const postEvent = async (event) => {
+// Adds new beers
+export const postBeers = async (beers) => {
   try {
-    const response = await instance.post("events", event);
+    const response = await instance.post("beers", beers);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -55,10 +55,10 @@ export const postEvent = async (event) => {
 };
 
 // DELETE
-// Deletes one event with the given id
-export const deleteEvent = async (id) => {
+// Deletes beers with the given id
+export const deleteBeers = async (id) => {
   try {
-    const response = await instance.delete(`events/${id}`);
+    const response = await instance.delete(`beers/${id}`);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
