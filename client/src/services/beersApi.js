@@ -24,7 +24,7 @@ const errorHandler = (err) => {
 // Fetches all beers
 export const getAllBeers = async () => {
   try {
-    const response = await instance.get("beers");
+    const response = await instance.get("/api/beers");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -35,8 +35,7 @@ export const getAllBeers = async () => {
 // Fetches beers from past 7 days
 export const getBeersFromPastWeek = async () => {
   try {
-    const response = await instance.get("beers?ageLimit=7");
-    console.log(response);
+    const response = await instance.get("/api/beers?ageLimit=7");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -47,7 +46,7 @@ export const getBeersFromPastWeek = async () => {
 // Adds new beers
 export const postBeers = async (beers) => {
   try {
-    const response = await instance.post("beers", beers);
+    const response = await instance.post("/api/beers", beers);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -58,7 +57,7 @@ export const postBeers = async (beers) => {
 // Deletes beers with the given id
 export const deleteBeers = async (id) => {
   try {
-    const response = await instance.delete(`beers/${id}`);
+    const response = await instance.delete(`/api/beers/${id}`);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
