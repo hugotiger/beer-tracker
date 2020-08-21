@@ -97,17 +97,6 @@ export function BeerList() {
               </ListButton>
             )}
           </List>
-          {/* <p style={{ textAlign: "center" }}>Show more
-              font-size: 1.4rem;
-    padding: 0.7rem 1.4rem;
-    width: fit-content;
-    margin: 0 auto;
-    color: #2576f7;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: 500;
-          
-          </p> */}
         </>
       )}
     </div>
