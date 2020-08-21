@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
-  timeout: 5000,
-});
+// const instance = axios.create({
+//   baseURL: process.env.REACT_APP_API_BASE_URL,
+//   timeout: 5000,
+// });
 
 const errorHandler = (err) => {
   let errMsg = "";
@@ -25,7 +25,7 @@ const errorHandler = (err) => {
 // Fetches all beers
 export const getAllBeers = async () => {
   try {
-    const response = await instance.get("beers");
+    const response = await axios.get("beers");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -36,7 +36,7 @@ export const getAllBeers = async () => {
 // Fetches beers from past 7 days
 export const getBeersFromPastWeek = async () => {
   try {
-    const response = await instance.get("beers?ageLimit=7");
+    const response = await axios.get("beers?ageLimit=7");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -47,7 +47,7 @@ export const getBeersFromPastWeek = async () => {
 // Adds new beers
 export const postBeers = async (beers) => {
   try {
-    const response = await instance.post("beers", beers);
+    const response = await axios.post("beers", beers);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
@@ -58,7 +58,7 @@ export const postBeers = async (beers) => {
 // Deletes beers with the given id
 export const deleteBeers = async (id) => {
   try {
-    const response = await instance.delete(`beers/${id}`);
+    const response = await axios.delete(`beers/${id}`);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
