@@ -36,6 +36,7 @@ export const getAllBeers = async () => {
 export const getBeersFromPastWeek = async () => {
   try {
     const response = await instance.get("beers?ageLimit=7");
+    console.log(response);
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
