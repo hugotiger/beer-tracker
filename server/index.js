@@ -4,13 +4,12 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('config');
 const path = require('path');
 const middlewares = require('./middlewares');
 
 // Connect to database
 mongoose
-  .connect(config.get('db_uri'), {
+  .connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -23,7 +22,7 @@ const app = express();
 // Middlewares
 app.use(morgan('common'));
 app.use(helmet());
-app.use(cors({ origin: config.get('cors_origin') }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 
 app.use('/api/beers', require('./api/beers'));
@@ -41,6 +40,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start server
-const port = config.get('port');
+const port = process.env.PORT || 1337;
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
