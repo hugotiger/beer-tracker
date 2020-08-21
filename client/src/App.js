@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Header } from "./components/header";
 import { TotalCounter } from "./presentational/TotalCounter";
 import { BeersDashboard } from "./presentational/BeersDashboard";
