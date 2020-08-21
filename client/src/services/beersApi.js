@@ -55,7 +55,7 @@ export const postBeers = async (beers) => {
 
 // DELETE
 // Deletes beers with the given id
-export const deleteBeer = async (id) => {
+export const deleteBeers = async (id) => {
   try {
     const response = await instance.delete(`beers/${id}`);
     return { error: false, data: response.data };
