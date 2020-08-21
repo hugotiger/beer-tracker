@@ -8,8 +8,6 @@ const config = require('config');
 const path = require('path');
 const middlewares = require('./middlewares');
 
-// console.log(config);
-console.log(config.get('db_uri'));
 // Connect to database
 mongoose
   .connect(config.get('db_uri'), {
