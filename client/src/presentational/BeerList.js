@@ -16,7 +16,7 @@ export function BeerList() {
     error,
     showCount,
     fetchBeersFromPastWeek,
-    removeBeer,
+    removeBeers,
     increaseCount,
   } = useContext(BeerContext);
 
@@ -79,7 +79,7 @@ export function BeerList() {
                   timestamp={beers.createdAt}
                   comment={beers.comment}
                   handleDelete={() => {
-                    if (!isLoading) removeBeer(beers);
+                    if (!isLoading) removeBeers(beers);
                   }}
                 />
               </ListItem>
