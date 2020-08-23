@@ -11,6 +11,6 @@ export const formatNumber = (number) => {
   } else if (number > 9) {
     return Math.floor(number / 10) * 10 + "+";
   } else {
-    return number;
+    return number + "+";
   }
 };
