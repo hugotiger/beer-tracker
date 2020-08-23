@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run start --prefix client\"",
     "install-client": "cd client && npm install",
     "install-server": "cd server && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "serve": "npm run build --prefix client && NODE_ENV=production node server/index.js"
   },
   "author": "Hugo Tiger Holm",
   "devDependencies": {
