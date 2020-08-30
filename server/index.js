@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
@@ -13,14 +14,14 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  // eslint-disable-next-line no-console
-  .then(() => console.log('Database connected'));
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.log(err));
 
 // Initialize express app
 const app = express();
 
 // Middlewares
-app.use(morgan('common'));
+app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
@@ -41,5 +42,4 @@ if (process.env.NODE_ENV === 'production') {
 
 // Start server
 const port = process.env.PORT || 1337;
-// eslint-disable-next-line no-console
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
