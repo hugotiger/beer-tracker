@@ -9,13 +9,34 @@ import {
 } from "../components";
 import ChevronIcon from "../assets/chevron-down.svg";
 
+function Headline({ children }) {
+  return (
+    <>
+      <h2>
+        History{" "}
+        <span
+          style={{
+            opacity: 0.5,
+            fontWeight: 400,
+            fontSize: 14,
+            marginLeft: "auto",
+          }}
+        >
+          (past 30 days)
+        </span>
+      </h2>
+      {children}
+    </>
+  );
+}
+
 export function BeerList() {
   const {
     beers,
     isLoading,
     error,
     showCount,
-    fetchBeersFromPastWeek,
+    fetchBeersFromPast30Days,
     removeBeers,
     increaseCount,
   } = useContext(BeerContext);
@@ -23,7 +44,7 @@ export function BeerList() {
   const [openEvent, setOpenEvent] = useState(null);
 
   useEffect(() => {
-    fetchBeersFromPastWeek();
+    fetchBeersFromPast30Days();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,25 +57,23 @@ export function BeerList() {
   // else there's a different loading animation
   if (isLoading && !beers) {
     return (
-      <>
-        <h2>History</h2>
+      <Headline>
         <p>Loading...</p>
-      </>
+      </Headline>
     );
   }
 
   if (error) {
     return (
-      <>
-        <h2>History</h2>
+      <Headline>
         <p>{error}</p>
-      </>
+      </Headline>
     );
   }
 
   return (
     <div>
-      <h2>History</h2>
+      <Headline></Headline>
       {/* // Only renders list if length is greater than zero. Else it renders a "no history" message */}
       {beers && (
         <>
