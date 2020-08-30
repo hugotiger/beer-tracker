@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import {
-  getBeersFromPastWeek,
+  getBeersFromPast30Days,
   postBeers,
   deleteBeers,
 } from "../../services/beersApi";
@@ -29,9 +29,9 @@ export const BeerProvider = ({ children }) => {
   const { addAlert } = useSnackBars();
 
   // Actions
-  const fetchBeersFromPastWeek = () => {
+  const fetchBeersFromPast30Days = () => {
     dispatch({ type: BEER_LOADING });
-    getBeersFromPastWeek().then((res) => {
+    getBeersFromPast30Days().then((res) => {
       dispatch({
         type: res.error ? ERROR : BEER_FETCHED,
         payload: res.data,
@@ -93,7 +93,7 @@ export const BeerProvider = ({ children }) => {
         showCount: state.showCount,
         isLoading: state.isLoading,
         error: state.error,
-        fetchBeersFromPastWeek,
+        fetchBeersFromPast30Days,
         addBeers,
         removeBeers,
         increaseCount,

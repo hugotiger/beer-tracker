@@ -32,10 +32,10 @@ export const getAllBeers = async () => {
 };
 
 // GET
-// Fetches beers from past 7 days
-export const getBeersFromPastWeek = async () => {
+// Fetches beers from past 30 days
+export const getBeersFromPast30Days = async () => {
   try {
-    const response = await instance.get("/api/beers?ageLimit=7");
+    const response = await instance.get("/api/beers?ageLimit=30");
     return { error: false, data: response.data };
   } catch (err) {
     return errorHandler(err);
